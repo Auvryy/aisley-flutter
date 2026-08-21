@@ -112,7 +112,7 @@ class _CheckoutModalState extends State<CheckoutModal> {
               ),
               onPressed: () {
                 Navigator.of(ctx).pop();
-                widget.onOrderPlaced?.call(3); // Switch to Orders tab
+                widget.onOrderPlaced?.call(2); // Switch to Orders tab (index 2)
               },
               child: const Text('View Order Tracking'),
             ),

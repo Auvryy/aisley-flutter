@@ -136,11 +136,12 @@ void main() {
       await tester.pump(const Duration(milliseconds: 500));
       await tester.pumpAndSettle();
 
-      // Now we should be on the storefront with navigation bar
+      // Now we should be on the storefront with 4 navigation bar items
       expect(find.text('AISLEY'), findsOneWidget);
-      expect(find.text('Shop'), findsOneWidget);
-      expect(find.text('Bag'), findsOneWidget);
-      expect(find.text('Concierge'), findsOneWidget);
+      expect(find.text('Home'), findsOneWidget);
+      expect(find.text('Cart'), findsOneWidget);
+      expect(find.text('Orders'), findsOneWidget);
+      expect(find.text('Profile'), findsOneWidget);
     });
   });
 }
