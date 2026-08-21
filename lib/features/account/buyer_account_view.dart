@@ -4,6 +4,8 @@ import '../../core/models/order.dart';
 import '../../core/widgets/aisley_button.dart';
 import '../../core/widgets/status_badge.dart';
 import '../../state/buyer_state.dart';
+import '../categories/buyer_categories_view.dart';
+import '../chat/buyer_chat_view.dart';
 
 class BuyerAccountView extends StatelessWidget {
   final ValueChanged<int>? onNavigateToTab;
@@ -87,7 +89,7 @@ class BuyerAccountView extends StatelessWidget {
             ),
             const SizedBox(height: 16),
 
-            // Order Metrics Row
+            // Order Metrics Row (Navigates to Orders tab: Index 2)
             Container(
               padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 10),
               decoration: BoxDecoration(
@@ -101,16 +103,139 @@ class BuyerAccountView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   _buildMetricItem('To Ship', '$toShipCount', Icons.inventory_2_outlined, isDark, () {
-                    onNavigateToTab?.call(3);
+                    onNavigateToTab?.call(2);
                   }),
                   _buildMetricDivider(isDark),
                   _buildMetricItem('In Transit', '$inTransitCount', Icons.local_shipping_outlined, isDark, () {
-                    onNavigateToTab?.call(3);
+                    onNavigateToTab?.call(2);
                   }),
                   _buildMetricDivider(isDark),
                   _buildMetricItem('Delivered', '$deliveredCount', Icons.check_circle_outline, isDark, () {
-                    onNavigateToTab?.call(3);
+                    onNavigateToTab?.call(2);
                   }),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+
+            // Services & Shortcuts (Concierge Chat & Categories Directory)
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: isDark ? AisleyColors.obsidianSurface : Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(
+                  color: isDark ? AisleyColors.obsidianBorder : AisleyColors.lightBorder,
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Marketplace Services',
+                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.w800),
+                  ),
+                  const SizedBox(height: 10),
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (_) => const BuyerChatView()),
+                      );
+                    },
+                    borderRadius: BorderRadius.circular(12),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: AisleyColors.accentPink.withValues(alpha: 0.12),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: const Icon(Icons.chat_bubble_outline_rounded, size: 20, color: AisleyColors.accentPink),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Boutique Concierge Chat',
+                                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.w800),
+                                ),
+                                Text(
+                                  'Direct thread with Maison Dela Tour, Luzon Goldsmiths & artisans',
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    color: isDark ? AisleyColors.obsidianTextMuted : AisleyColors.lightTextMuted,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          if (state.unreadChatCount > 0)
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              decoration: BoxDecoration(
+                                color: AisleyColors.accentPink,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Text(
+                                '${state.unreadChatCount} New',
+                                style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                              ),
+                            )
+                          else
+                            const Icon(Icons.chevron_right, size: 20, color: AisleyColors.lightTextMuted),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const Divider(height: 16),
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (_) => const BuyerCategoriesView()),
+                      );
+                    },
+                    borderRadius: BorderRadius.circular(12),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: AisleyColors.electricSky.withValues(alpha: 0.12),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: const Icon(Icons.grid_view_outlined, size: 20, color: AisleyColors.electricSky),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Categories & Atelier Directory',
+                                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.w800),
+                                ),
+                                Text(
+                                  'Explore all 6 luxury categories across Philippine islands',
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    color: isDark ? AisleyColors.obsidianTextMuted : AisleyColors.lightTextMuted,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const Icon(Icons.chevron_right, size: 20, color: AisleyColors.lightTextMuted),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

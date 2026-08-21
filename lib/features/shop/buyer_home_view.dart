@@ -5,10 +5,19 @@ import '../../core/utils/formatters.dart';
 import '../../core/widgets/aisley_image.dart';
 import '../../core/widgets/status_badge.dart';
 import '../../state/buyer_state.dart';
+import '../categories/buyer_categories_view.dart';
+import '../chat/buyer_chat_view.dart';
 import 'product_detail_sheet.dart';
 
 class BuyerHomeView extends StatelessWidget {
-  const BuyerHomeView({super.key});
+  final VoidCallback? onOpenChat;
+  final VoidCallback? onOpenCategories;
+
+  const BuyerHomeView({
+    super.key,
+    this.onOpenChat,
+    this.onOpenCategories,
+  });
 
   final List<String> _categories = const [
     'All',
@@ -42,6 +51,25 @@ class BuyerHomeView extends StatelessWidget {
           ],
         ),
         actions: [
+          // Concierge Chat Quick Action Button
+          IconButton(
+            tooltip: 'Concierge Chat',
+            icon: Badge(
+              isLabelVisible: state.unreadChatCount > 0,
+              label: Text('${state.unreadChatCount}'),
+              backgroundColor: AisleyColors.accentPink,
+              child: const Icon(Icons.chat_bubble_outline_rounded),
+            ),
+            onPressed: () {
+              if (onOpenChat != null) {
+                onOpenChat!();
+              } else {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const BuyerChatView()),
+                );
+              }
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.notifications_none_rounded),
             onPressed: () {},
@@ -50,24 +78,38 @@ class BuyerHomeView extends StatelessWidget {
       ),
       body: CustomScrollView(
         slivers: [
-          // Search Bar
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
-              child: TextField(
-                onChanged: (val) => state.setSearchQuery(val),
-                decoration: InputDecoration(
-                  hintText: 'Search luxury blazers, fine jewelry, leather...',
-                  prefixIcon: const Icon(Icons.search, size: 20, color: AisleyColors.accentPink),
-                  suffixIcon: state.searchQuery.isNotEmpty
-                      ? IconButton(
-                          icon: const Icon(Icons.close, size: 18),
-                          onPressed: () => state.setSearchQuery(''),
-                        )
-                      : null,
-                  filled: true,
-                  fillColor: isDark ? AisleyColors.obsidianSurface : Colors.white,
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          // Sticky Pinned Search Bar Header
+          SliverPersistentHeader(
+            pinned: true,
+            delegate: _StickySearchBarDelegate(
+              height: 68.0,
+              child: Container(
+                color: isDark ? AisleyColors.obsidianCanvas : AisleyColors.lightCanvas,
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                alignment: Alignment.center,
+                child: TextField(
+                  onChanged: (val) => state.setSearchQuery(val),
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: isDark ? Colors.white : AisleyColors.textDarkPrimary,
+                  ),
+                  decoration: InputDecoration(
+                    hintText: 'Search luxury blazers, fine jewelry, leather...',
+                    hintStyle: TextStyle(
+                      fontSize: 13,
+                      color: isDark ? AisleyColors.obsidianTextMuted : AisleyColors.lightTextMuted,
+                    ),
+                    prefixIcon: const Icon(Icons.search, size: 20, color: AisleyColors.accentPink),
+                    suffixIcon: state.searchQuery.isNotEmpty
+                        ? IconButton(
+                            icon: const Icon(Icons.close, size: 18),
+                            onPressed: () => state.setSearchQuery(''),
+                          )
+                        : null,
+                    filled: true,
+                    fillColor: isDark ? AisleyColors.obsidianSurface : Colors.white,
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  ),
                 ),
               ),
             ),
@@ -123,7 +165,44 @@ class BuyerHomeView extends StatelessWidget {
             ),
           ),
 
-          // Category Pills
+          // Category Pills Header
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Explore Collections',
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      if (onOpenCategories != null) {
+                        onOpenCategories!();
+                      } else {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => const BuyerCategoriesView(),
+                          ),
+                        );
+                      }
+                    },
+                    child: const Text(
+                      'View All Categories →',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w800,
+                        color: AisleyColors.accentPink,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          // Horizontal Category Pills
           SliverToBoxAdapter(
             child: SizedBox(
               height: 48,
@@ -143,10 +222,14 @@ class BuyerHomeView extends StatelessWidget {
                     labelStyle: TextStyle(
                       fontSize: 12,
                       fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,
-                      color: isSelected ? AisleyColors.accentPink : (isDark ? Colors.white : AisleyColors.textDarkPrimary),
+                      color: isSelected
+                          ? AisleyColors.accentPink
+                          : (isDark ? Colors.white : AisleyColors.textDarkPrimary),
                     ),
                     side: BorderSide(
-                      color: isSelected ? AisleyColors.accentPink : (isDark ? AisleyColors.obsidianBorder : AisleyColors.lightBorder),
+                      color: isSelected
+                          ? AisleyColors.accentPink
+                          : (isDark ? AisleyColors.obsidianBorder : AisleyColors.lightBorder),
                     ),
                     onSelected: (val) {
                       if (val) state.setSelectedCategory(cat);
@@ -368,5 +451,28 @@ class BuyerHomeView extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class _StickySearchBarDelegate extends SliverPersistentHeaderDelegate {
+  final Widget child;
+  final double height;
+
+  _StickySearchBarDelegate({required this.child, required this.height});
+
+  @override
+  double get minExtent => height;
+
+  @override
+  double get maxExtent => height;
+
+  @override
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return child;
+  }
+
+  @override
+  bool shouldRebuild(covariant _StickySearchBarDelegate oldDelegate) {
+    return child != oldDelegate.child || height != oldDelegate.height;
   }
 }

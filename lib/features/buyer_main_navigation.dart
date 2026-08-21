@@ -28,11 +28,16 @@ class _BuyerMainNavigationState extends State<BuyerMainNavigation> {
     final state = BuyerStateProvider.of(context);
 
     final List<Widget> pages = [
-      const BuyerHomeView(),
-      BuyerCategoriesView(onNavigateToTab: _onTabTapped),
+      BuyerHomeView(
+        onOpenChat: () => Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => const BuyerChatView()),
+        ),
+        onOpenCategories: () => Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => const BuyerCategoriesView()),
+        ),
+      ),
       BuyerCartView(onNavigateToTab: _onTabTapped),
       const BuyerOrdersView(),
-      const BuyerChatView(),
       BuyerAccountView(onNavigateToTab: _onTabTapped),
     ];
 
@@ -63,12 +68,7 @@ class _BuyerMainNavigationState extends State<BuyerMainNavigation> {
               const NavigationDestination(
                 icon: Icon(Icons.storefront_outlined),
                 selectedIcon: Icon(Icons.storefront, color: AisleyColors.accentPink),
-                label: 'Shop',
-              ),
-              const NavigationDestination(
-                icon: Icon(Icons.grid_view_outlined),
-                selectedIcon: Icon(Icons.grid_view, color: AisleyColors.accentPink),
-                label: 'Catalog',
+                label: 'Home',
               ),
               NavigationDestination(
                 icon: Badge(
@@ -83,27 +83,12 @@ class _BuyerMainNavigationState extends State<BuyerMainNavigation> {
                   backgroundColor: AisleyColors.accentPink,
                   child: const Icon(Icons.shopping_bag, color: AisleyColors.accentPink),
                 ),
-                label: 'Bag',
+                label: 'Cart',
               ),
               const NavigationDestination(
                 icon: Icon(Icons.receipt_long_outlined),
                 selectedIcon: Icon(Icons.receipt_long, color: AisleyColors.accentPink),
                 label: 'Orders',
-              ),
-              NavigationDestination(
-                icon: Badge(
-                  isLabelVisible: state.unreadChatCount > 0,
-                  label: Text('${state.unreadChatCount}'),
-                  backgroundColor: AisleyColors.accentPink,
-                  child: const Icon(Icons.chat_bubble_outline_rounded),
-                ),
-                selectedIcon: Badge(
-                  isLabelVisible: state.unreadChatCount > 0,
-                  label: Text('${state.unreadChatCount}'),
-                  backgroundColor: AisleyColors.accentPink,
-                  child: const Icon(Icons.chat_bubble_rounded, color: AisleyColors.accentPink),
-                ),
-                label: 'Concierge',
               ),
               const NavigationDestination(
                 icon: Icon(Icons.person_outline),
