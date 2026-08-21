@@ -86,13 +86,17 @@ class AisleyButton extends StatelessWidget {
           Icon(leadingIcon, size: 18, color: foregroundColor),
           const SizedBox(width: 8),
         ],
-        Text(
-          text,
-          style: TextStyle(
-            color: foregroundColor,
-            fontSize: 14,
-            fontWeight: FontWeight.w800,
-            letterSpacing: -0.2,
+        Flexible(
+          child: Text(
+            text,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+            style: TextStyle(
+              color: foregroundColor,
+              fontSize: 14,
+              fontWeight: FontWeight.w800,
+              letterSpacing: -0.2,
+            ),
           ),
         ),
         if (!isLoading && trailingIcon != null) ...[

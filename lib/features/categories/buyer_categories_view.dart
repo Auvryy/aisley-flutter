@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../core/constants/colors.dart';
+import '../../core/widgets/aisley_image.dart';
 import '../../state/buyer_state.dart';
 
 class CategoryItemData {
@@ -81,60 +82,64 @@ class BuyerCategoriesView extends StatelessWidget {
               onNavigateToTab?.call(0); // Switch to Discovery / Shop tab
             },
             borderRadius: BorderRadius.circular(16),
-            child: Container(
-              height: 130,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                image: DecorationImage(
-                  image: NetworkImage(cat.imageUrl),
-                  fit: BoxFit.cover,
-                  colorFilter: ColorFilter.mode(
-                    Colors.black.withValues(alpha: 0.55),
-                    BlendMode.darken,
-                  ),
-                ),
-                border: Border.all(
-                  color: isDark ? AisleyColors.obsidianBorder : AisleyColors.lightBorder,
-                ),
-              ),
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.end,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Stack(
                 children: [
+                  AisleyNetworkImage(
+                    imageUrl: cat.imageUrl,
+                    width: double.infinity,
+                    height: 130,
+                    fit: BoxFit.cover,
+                  ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                    height: 130,
                     decoration: BoxDecoration(
-                      color: AisleyColors.accentPink,
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    child: Text(
-                      cat.itemCount,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 10,
-                        fontWeight: FontWeight.w800,
+                      color: Colors.black.withValues(alpha: 0.55),
+                      border: Border.all(
+                        color: isDark ? AisleyColors.obsidianBorder : AisleyColors.lightBorder,
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 6),
-                  Text(
-                    cat.title,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 17,
-                      fontWeight: FontWeight.w900,
-                      letterSpacing: -0.4,
-                    ),
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    cat.description,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      color: Colors.white70,
-                      fontSize: 11,
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          decoration: BoxDecoration(
+                            color: AisleyColors.accentPink,
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Text(
+                            '${cat.itemCount} ATELIER PIECES',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 9,
+                              fontWeight: FontWeight.w900,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        Text(
+                          cat.title,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w900,
+                            letterSpacing: -0.3,
+                          ),
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          cat.description,
+                          style: const TextStyle(
+                            color: Colors.white70,
+                            fontSize: 11,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
