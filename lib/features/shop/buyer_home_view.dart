@@ -172,10 +172,14 @@ class BuyerHomeView extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    'Explore Collections',
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+                  const Expanded(
+                    child: Text(
+                      'Explore Collections',
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+                    ),
                   ),
+                  const SizedBox(width: 8),
                   InkWell(
                     onTap: () {
                       if (onOpenCategories != null) {

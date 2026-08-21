@@ -6,6 +6,7 @@ import '../../core/widgets/aisley_button.dart';
 import '../../core/widgets/aisley_image.dart';
 import '../../core/widgets/status_badge.dart';
 import '../../state/buyer_state.dart';
+import 'product_detail_page.dart';
 
 class ProductDetailSheet extends StatefulWidget {
   final Product product;
@@ -310,7 +311,41 @@ class _ProductDetailSheetState extends State<ProductDetailSheet> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 14),
+
+                  // See Full Product Page & Reviews Link
+                  Center(
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => ProductDetailPage(product: widget.product),
+                          ),
+                        );
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+                        child: Wrap(
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          alignment: WrapAlignment.center,
+                          children: const [
+                            Text(
+                              'See Full Details, Reviews & Atelier Info',
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w800,
+                                color: AisleyColors.accentPink,
+                              ),
+                            ),
+                            SizedBox(width: 4),
+                            Icon(Icons.arrow_forward_rounded, size: 14, color: AisleyColors.accentPink),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
                 ],
               ),
             ),

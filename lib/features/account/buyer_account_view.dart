@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../core/constants/colors.dart';
 import '../../core/models/order.dart';
 import '../../core/widgets/aisley_button.dart';
+import '../../core/widgets/aisley_image.dart';
 import '../../core/widgets/status_badge.dart';
 import '../../state/buyer_state.dart';
 import '../categories/buyer_categories_view.dart';
@@ -43,12 +44,13 @@ class BuyerAccountView extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  CircleAvatar(
-                    radius: 32,
-                    backgroundImage: NetworkImage(
-                      buyer?.avatarUrl ??
-                          'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
-                    ),
+                  AisleyNetworkImage(
+                    imageUrl: buyer?.avatarUrl ??
+                        'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
+                    width: 64,
+                    height: 64,
+                    borderRadius: BorderRadius.circular(32),
+                    fit: BoxFit.cover,
                   ),
                   const SizedBox(width: 14),
                   Expanded(

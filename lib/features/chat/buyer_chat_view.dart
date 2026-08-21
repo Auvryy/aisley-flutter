@@ -78,9 +78,12 @@ class _BuyerChatViewState extends State<BuyerChatView> {
                 ),
                 child: Row(
                   children: [
-                    CircleAvatar(
-                      radius: 24,
-                      backgroundImage: NetworkImage(thread.boutiqueAvatar),
+                    AisleyNetworkImage(
+                      imageUrl: thread.boutiqueAvatar,
+                      width: 48,
+                      height: 48,
+                      borderRadius: BorderRadius.circular(24),
+                      fit: BoxFit.cover,
                     ),
                     const SizedBox(width: 12),
                     Expanded(
@@ -153,9 +156,12 @@ class _BuyerChatViewState extends State<BuyerChatView> {
         ),
         title: Row(
           children: [
-            CircleAvatar(
-              radius: 18,
-              backgroundImage: NetworkImage(activeThread.boutiqueAvatar),
+            AisleyNetworkImage(
+              imageUrl: activeThread.boutiqueAvatar,
+              width: 36,
+              height: 36,
+              borderRadius: BorderRadius.circular(18),
+              fit: BoxFit.cover,
             ),
             const SizedBox(width: 10),
             Expanded(

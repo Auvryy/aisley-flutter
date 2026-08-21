@@ -14,6 +14,28 @@ class ProductVariant {
   });
 }
 
+class ProductReview {
+  final String id;
+  final String authorName;
+  final String authorAvatar;
+  final double rating;
+  final String date;
+  final String comment;
+  final String? variantPurchased;
+  final bool isVerifiedBuyer;
+
+  const ProductReview({
+    required this.id,
+    required this.authorName,
+    required this.authorAvatar,
+    required this.rating,
+    required this.date,
+    required this.comment,
+    this.variantPurchased,
+    this.isVerifiedBuyer = true,
+  });
+}
+
 class Product {
   final String id;
   final String title;
@@ -32,6 +54,7 @@ class Product {
   final double rating;
   final int reviewCount;
   final bool isFeatured;
+  final List<ProductReview> reviews;
 
   const Product({
     required this.id,
@@ -51,5 +74,6 @@ class Product {
     this.rating = 5.0,
     this.reviewCount = 12,
     this.isFeatured = false,
+    this.reviews = const [],
   });
 }

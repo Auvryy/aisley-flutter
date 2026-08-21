@@ -80,6 +80,7 @@ final List<Product> MOCK_PRODUCTS = [
     images: [
       'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&auto=format&fit=crop&q=80',
       'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=600&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&auto=format&fit=crop&q=80',
     ],
     variants: [
       ProductVariant(id: 'v-101', name: 'Size S • Noir Black', sku: 'MDT-BLZ-001-S-NR', price: 14850.00, stock: 4),
@@ -91,6 +92,35 @@ final List<Product> MOCK_PRODUCTS = [
     rating: 4.9,
     reviewCount: 18,
     isFeatured: true,
+    reviews: [
+      ProductReview(
+        id: 'rev-101',
+        authorName: 'Camilla Valderrama',
+        authorAvatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&auto=format&fit=crop&q=80',
+        rating: 5.0,
+        date: '2 days ago',
+        variantPurchased: 'Size M • Noir Black',
+        comment: 'The drape and tailoring are exquisite! The raw silk holds a subtle sheen that looks effortless yet commanding. White-glove delivery in Manila was seamless.',
+      ),
+      ProductReview(
+        id: 'rev-102',
+        authorName: 'Rafael Santillan',
+        authorAvatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&auto=format&fit=crop&q=80',
+        rating: 5.0,
+        date: '1 week ago',
+        variantPurchased: 'Size L • Noir Black',
+        comment: 'Superior quality horn buttons and luxury lining. Maison Dela Tour truly preserves bespoke French-Philippine heritage craftsmanship.',
+      ),
+      ProductReview(
+        id: 'rev-103',
+        authorName: 'Bianca Teodoro',
+        authorAvatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&auto=format&fit=crop&q=80',
+        rating: 4.8,
+        date: '2 weeks ago',
+        variantPurchased: 'Size S • Ivory Cream',
+        comment: 'Fits true to size with a gentle relaxed shoulder pad structure. Beautifully packaged with cedar garment bag.',
+      ),
+    ],
   ),
   const Product(
     id: 'prod-002',
@@ -107,6 +137,7 @@ final List<Product> MOCK_PRODUCTS = [
         'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=600&auto=format&fit=crop&q=80',
     images: [
       'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=600&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=600&auto=format&fit=crop&q=80',
     ],
     variants: [
       ProductVariant(id: 'v-201', name: 'Size XS • Mulberry Rose', sku: 'MDT-DRS-002-XS-RS', price: 9200.00, stock: 2),
@@ -118,6 +149,17 @@ final List<Product> MOCK_PRODUCTS = [
     rating: 5.0,
     reviewCount: 9,
     isFeatured: true,
+    reviews: [
+      ProductReview(
+        id: 'rev-201',
+        authorName: 'Isabella Zobel',
+        authorAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80',
+        rating: 5.0,
+        date: '3 days ago',
+        variantPurchased: 'Size S • Mulberry Rose',
+        comment: 'Pure elegance. The bias cut conforms gracefully to movements. Wore it to an evening gala and received endless compliments.',
+      ),
+    ],
   ),
   const Product(
     id: 'prod-003',
@@ -134,6 +176,7 @@ final List<Product> MOCK_PRODUCTS = [
         'https://images.unsplash.com/photo-1611591475837-77565e3cf758?w=600&auto=format&fit=crop&q=80',
     images: [
       'https://images.unsplash.com/photo-1611591475837-77565e3cf758?w=600&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&auto=format&fit=crop&q=80',
     ],
     variants: [
       ProductVariant(id: 'v-301', name: 'Standard • 925 Sterling Silver', sku: 'LZN-JWL-003-SLV', price: 6800.00, stock: 14),
@@ -144,6 +187,17 @@ final List<Product> MOCK_PRODUCTS = [
     rating: 4.8,
     reviewCount: 24,
     isFeatured: true,
+    reviews: [
+      ProductReview(
+        id: 'rev-301',
+        authorName: 'Tristan Roxas',
+        authorAvatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80',
+        rating: 5.0,
+        date: '5 days ago',
+        variantPurchased: '18K Gold Vermeil',
+        comment: 'Heft and hand-hammered finish are phenomenal. Feels like museum piece jewelry.',
+      ),
+    ],
   ),
   const Product(
     id: 'prod-004',
@@ -160,6 +214,7 @@ final List<Product> MOCK_PRODUCTS = [
         'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&auto=format&fit=crop&q=80',
     images: [
       'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=600&auto=format&fit=crop&q=80',
     ],
     variants: [
       ProductVariant(id: 'v-401', name: 'One Size • Saddle Tan', sku: 'MRK-LTH-004-TAN', price: 18500.00, stock: 3),
@@ -170,6 +225,17 @@ final List<Product> MOCK_PRODUCTS = [
     rating: 4.9,
     reviewCount: 14,
     isFeatured: true,
+    reviews: [
+      ProductReview(
+        id: 'rev-401',
+        authorName: 'Marites Ayala',
+        authorAvatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&auto=format&fit=crop&q=80',
+        rating: 5.0,
+        date: '4 days ago',
+        variantPurchased: 'One Size • Saddle Tan',
+        comment: 'The scent of genuine vegetable-tanned leather is wonderful. Hand-stitching from Marikina masters is unmatched.',
+      ),
+    ],
   ),
   const Product(
     id: 'prod-005',
@@ -186,6 +252,7 @@ final List<Product> MOCK_PRODUCTS = [
         'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=600&auto=format&fit=crop&q=80',
     images: [
       'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=600&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=600&auto=format&fit=crop&q=80',
     ],
     variants: [
       ProductVariant(id: 'v-501', name: '50ml Luxury Flacon', sku: 'ARA-FRG-005-50ML', price: 5400.00, stock: 35),
@@ -195,6 +262,17 @@ final List<Product> MOCK_PRODUCTS = [
     rating: 5.0,
     reviewCount: 31,
     isFeatured: false,
+    reviews: [
+      ProductReview(
+        id: 'rev-501',
+        authorName: 'Enrique Lopez',
+        authorAvatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80',
+        rating: 5.0,
+        date: '1 week ago',
+        variantPurchased: '50ml Luxury Flacon',
+        comment: 'Lasts over 14 hours on skin. The natural Sampaguita note is authentic and intoxicating.',
+      ),
+    ],
   ),
   const Product(
     id: 'prod-006',
@@ -220,6 +298,17 @@ final List<Product> MOCK_PRODUCTS = [
     rating: 4.7,
     reviewCount: 8,
     isFeatured: false,
+    reviews: [
+      ProductReview(
+        id: 'rev-601',
+        authorName: 'Dominique Tan',
+        authorAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80',
+        rating: 5.0,
+        date: '2 weeks ago',
+        variantPurchased: 'Medium Vessel (32cm)',
+        comment: 'Incredible texture and weight. Anchors our dining table aesthetic perfectly.',
+      ),
+    ],
   ),
 ];
 

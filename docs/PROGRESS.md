@@ -16,3 +16,6 @@ Active development in progress.
 ## 2026-08-21
 - Initialized mobile project scaffold and implemented core buyer flow (auth, registration, storefront, cart, orders, profile).
 - Adjusted navigation bar to 4 core tabs (Home, Cart, Orders, Profile) and pinned sticky search bar on home.
+- Added full product details page with image gallery, verified buyer reviews, and suggested products, linked from the quick preview sheet.
+- Structured centralized documentation suite (`docs/architecture.md`, `docs/requirements.md`, `docs/workflows.md`, `docs/schema.md`).
+- Added master AI context guide (`docs/GEMINI.md`) with 14 universal categories and multi-role marketplace specifications.

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:aisley_flutter/core/utils/formatters.dart';
 import 'package:aisley_flutter/main.dart';
@@ -142,6 +143,44 @@ void main() {
       expect(find.text('Cart'), findsOneWidget);
       expect(find.text('Orders'), findsOneWidget);
       expect(find.text('Profile'), findsOneWidget);
+    });
+
+    testWidgets('Tapping product opens quick sheet and see more navigates to full page', (WidgetTester tester) async {
+      tester.view.physicalSize = const Size(1080, 2400);
+      tester.view.devicePixelRatio = 2.0;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+
+      await tester.pumpWidget(const AisleyBuyerApp());
+      await tester.pumpAndSettle();
+
+      // Login
+      await tester.tap(find.text('Approved Buyer'));
+      await tester.pump(const Duration(milliseconds: 500));
+      await tester.pumpAndSettle();
+
+      // Tap on first product
+      final productFinder = find.text('Signature Noir Structured Silk Blazer');
+      expect(productFinder, findsOneWidget);
+      await tester.ensureVisible(productFinder);
+      await tester.pumpAndSettle();
+      await tester.tap(productFinder);
+      await tester.pumpAndSettle();
+
+      // Quick sheet should be visible
+      final seeMoreFinder = find.text('See Full Details, Reviews & Atelier Info');
+      expect(seeMoreFinder, findsOneWidget);
+      await tester.ensureVisible(seeMoreFinder);
+      await tester.pumpAndSettle();
+
+      // Tap See Full Details
+      await tester.tap(seeMoreFinder);
+      await tester.pumpAndSettle();
+
+      // Full page should be open with reviews and craftsmanship story
+      expect(find.text('Craftsmanship & Story'), findsOneWidget);
+      expect(find.text('Clientele Reviews'), findsOneWidget);
+      expect(find.text('You May Also Like'), findsOneWidget);
     });
   });
 }
